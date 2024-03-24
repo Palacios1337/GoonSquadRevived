@@ -38,7 +38,10 @@ model.compile(optimizer='adam',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-train = ImageDataGenerator(rescale=1./255)
+train = ImageDataGenerator(rescale=1./255,
+                           rotation_range=5,
+                           horizontal_flip=True,
+)
 validation = ImageDataGenerator(rescale=1./255)
 
 print(os.listdir("/Users/Juani/RowanHacksPictures"))
@@ -62,7 +65,7 @@ model_fit = model.fit(train_set,
                       validation_data = validation_set)
 
 dir_path = '/Users/Juani/RowanHacksPictures/test'
-
+'''
 for i in os.listdir(dir_path):
   for j in  os.listdir(dir_path+"/"+i):
     img = image.load_img(dir_path+"/"+i+"/"+j)
@@ -75,5 +78,5 @@ for i in os.listdir(dir_path):
     images = np.vstack([X])
     val = model.predict(images)
     print(val)
-
+'''
 model.save('/Users/Juani/RowanHacksPictures/model'+".keras")
